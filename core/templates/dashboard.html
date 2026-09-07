@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — AluminumAI</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="page-bg">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="dot"></span>
+            AluminumAI
+        </div>
+        <div class="nav-links">
+            {% if username %}
+            <span class="nav-user">👤 {{ username }}</span>
+            {% endif %}
+            <a href="/logout/" class="btn btn-ghost btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="dash-page">
+
+        <div class="dash-header anim-1">
+            <h2>Welcome back{% if username %}, {{ username }}{% endif %} 👋</h2>
+            <p>What would you like to do today?</p>
+        </div>
+
+        <div class="dash-grid">
+
+            <a href="/add-material/" class="dash-tile tile-blue anim-2">
+                <div class="tile-icon icon-blue">🧪</div>
+                <h3>Process Material</h3>
+                <p>Add raw material data and instantly calculate aluminum yield and red mud output.</p>
+                <div class="tile-arrow">Start Processing →</div>
+            </a>
+
+            <a href="/history/" class="dash-tile tile-purple anim-3">
+                <div class="tile-icon icon-purple">📊</div>
+                <h3>View History</h3>
+                <p>Browse all past extraction records, search by material name, and review results.</p>
+                <div class="tile-arrow">View Records →</div>
+            </a>
+
+            <a href="/results/" class="dash-tile tile-teal anim-4">
+                <div class="tile-icon icon-teal">📋</div>
+                <h3>Last Result</h3>
+                <p>Quickly access the most recent processing result from your last submission.</p>
+                <div class="tile-arrow">View Result →</div>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

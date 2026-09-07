@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AluminumAI — Smart Extraction System</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="page-bg">
+
+    <!-- Navbar -->
+    <nav class="home-nav">
+        <div class="nav-brand">
+            <span class="dot"></span>
+            AluminumAI
+        </div>
+        <div class="nav-links">
+            <a href="/login/"       class="btn btn-ghost btn-sm">User Login</a>
+            <a href="/admin-login/" class="btn btn-ghost btn-sm">Admin Login</a>
+            <a href="/register/"    class="btn btn-gradient btn-sm">Register</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-section">
+
+        <div class="hero-pill">
+            <span class="pill-dot"></span>
+            Industrial AI Platform
+        </div>
+
+        <h1 class="hero-title">
+            Smart Aluminum<br>
+            <span class="grad-text">Extraction System</span>
+        </h1>
+
+        <p class="hero-sub">
+            Predict aluminum yield from raw materials with precision.
+            Track every extraction, analyze purity, and optimize your process — all in one place.
+        </p>
+
+        <div class="hero-btns">
+            <a href="/add-material/" class="btn btn-gradient btn-lg">🚀 Start Processing</a>
+            <a href="/register/"     class="btn btn-ghost    btn-lg">Create Account</a>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-box">
+                <div class="num">99.8%</div>
+                <div class="lbl">Accuracy</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">Real-time</div>
+                <div class="lbl">Processing</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">2×</div>
+                <div class="lbl">Faster Analysis</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">100%</div>
+                <div class="lbl">Data Tracked</div>
+            </div>
+        </div>
+
+    </section>
+
+</body>
+</html>

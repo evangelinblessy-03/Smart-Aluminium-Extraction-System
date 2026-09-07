@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login — AluminumAI</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="page-bg">
+
+    <div class="auth-page">
+        <div class="auth-box anim-1">
+
+            <div class="auth-header">
+                <div class="auth-icon" style="background: linear-gradient(135deg, #f97316, #ef4444); box-shadow: 0 8px 24px rgba(249,115,22,0.4);">
+                    🛡️
+                </div>
+                <h2>Admin Login</h2>
+                <p>Restricted access — administrators only</p>
+            </div>
+
+            <div class="card auth-card" style="border-color: rgba(249,115,22,0.25); box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 60px rgba(249,115,22,0.07);">
+
+                {% if error %}
+                <div class="alert alert-error">⚠️ {{ error }}</div>
+                {% endif %}
+
+                <form method="POST" autocomplete="off">
+                    {% csrf_token %}
+                    <input type="text"     style="display:none;" name="fake_user">
+                    <input type="password" style="display:none;" name="fake_pass">
+
+                    <div class="form-group">
+                        <label>Admin Username</label>
+                        <input type="text" id="admin_user" name="username" class="form-input"
+                               placeholder="Enter admin username"
+                               autocomplete="new-password"
+                               style="border-color: rgba(249,115,22,0.2);"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Admin Password</label>
+                        <input type="password" id="admin_pass" name="password" class="form-input"
+                               placeholder="Enter admin password"
+                               autocomplete="new-password"
+                               style="border-color: rgba(249,115,22,0.2);"
+                               required>
+                    </div>
+
+                    <button type="submit" class="btn btn-full" style="
+                        margin-top: 0.5rem;
+                        background: linear-gradient(135deg, #f97316, #ef4444);
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 0.95rem;
+                        padding: 12px;
+                        border-radius: 10px;
+                        border: none;
+                        cursor: pointer;
+                        box-shadow: 0 4px 20px rgba(249,115,22,0.35);
+                        transition: all 0.22s ease;
+                    ">
+                        🛡️ Sign In as Admin →
+                    </button>
+                </form>
+
+            </div>
+
+            <div class="auth-footer" style="margin-top: 1rem;">
+                Not an admin? <a href="/login/">User Login</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.getElementById('admin_user').value = '';
+                document.getElementById('admin_pass').value = '';
+            }, 50);
+        });
+    </script>
+
+</body>
+</html>

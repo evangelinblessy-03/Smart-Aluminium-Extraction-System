@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results — AluminumAI</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="page-bg">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="dot"></span>
+            AluminumAI
+        </div>
+        <div class="nav-links">
+            <a href="/dashboard/" class="btn btn-ghost btn-sm">← Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="results-page">
+        <div class="results-box anim-1">
+
+            {% if error %}
+            <div class="card" style="padding:3rem; text-align:center;">
+                <div class="empty-box">
+                    <span class="e-icon">📭</span>
+                    <p>{{ error }}</p>
+                    <a href="/add-material/" class="btn btn-gradient" style="margin-top:1rem;">Process a Material</a>
+                </div>
+            </div>
+
+            {% else %}
+            <div class="card card-glow-teal results-card">
+
+                <div class="results-top">
+                    <div class="check-icon">✅</div>
+                    <h2>Extraction Complete</h2>
+                    <p>Processing results for your material</p>
+                </div>
+
+                {% if name %}
+                <div class="result-name-row">
+                    <span class="lbl">Material</span>
+                    <span class="val">{{ name }}</span>
+                </div>
+                {% endif %}
+
+                <div class="result-cards">
+                    <div class="result-metric highlight">
+                        <div class="m-label">Aluminum Yield</div>
+                        <div class="m-value">{{ aluminum }}</div>
+                        <div class="m-unit">kilograms</div>
+                    </div>
+                    <div class="result-metric">
+                        <div class="m-label">Red Mud</div>
+                        <div class="m-value" style="color:#94a3b8;">{{ red_mud }}</div>
+                        <div class="m-unit">kilograms</div>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <a href="/add-material/" class="btn btn-gradient">🔄 Process Again</a>
+                    <a href="/history/"      class="btn btn-ghost">📊 History</a>
+                </div>
+
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+</body>
+</html>

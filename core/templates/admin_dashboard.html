@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — AluminumAI</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="page-bg">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="dot" style="background: linear-gradient(135deg,#f97316,#ef4444); box-shadow: 0 0 10px rgba(249,115,22,0.6);"></span>
+            AluminumAI <span style="font-size:0.75rem; color:#f97316; margin-left:6px; font-weight:700;">ADMIN</span>
+        </div>
+        <div class="nav-links">
+            <span class="nav-user">🛡️ {{ username }}</span>
+            <a href="/logout/" class="btn btn-ghost btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="dash-page">
+
+        <div class="dash-header anim-1">
+            <h2>Admin Dashboard 🛡️</h2>
+            <p>System overview and management</p>
+        </div>
+
+        <!-- Stats Row -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:1.25rem; padding:0 2.5rem 1.5rem; max-width:1100px; margin:0 auto;">
+
+            <div class="card anim-2" style="padding:1.5rem; text-align:center; border-color:rgba(79,142,247,0.3);">
+                <div style="font-size:2rem; margin-bottom:0.5rem;">📊</div>
+                <div style="font-size:2rem; font-weight:900; background:linear-gradient(135deg,#4f8ef7,#8b5cf6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">{{ total_results }}</div>
+                <div style="font-size:0.78rem; color:#94a3b8; text-transform:uppercase; letter-spacing:0.8px; margin-top:4px;">Total Processes</div>
+            </div>
+
+            <div class="card anim-3" style="padding:1.5rem; text-align:center; border-color:rgba(20,184,166,0.3);">
+                <div style="font-size:2rem; margin-bottom:0.5rem;">🧪</div>
+                <div style="font-size:2rem; font-weight:900; background:linear-gradient(135deg,#14b8a6,#4f8ef7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">{{ total_materials }}</div>
+                <div style="font-size:0.78rem; color:#94a3b8; text-transform:uppercase; letter-spacing:0.8px; margin-top:4px;">Total Materials</div>
+            </div>
+
+            <div class="card anim-4" style="padding:1.5rem; text-align:center; border-color:rgba(249,115,22,0.3);">
+                <div style="font-size:2rem; margin-bottom:0.5rem;">👥</div>
+                <div style="font-size:2rem; font-weight:900; background:linear-gradient(135deg,#f97316,#ef4444); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">{{ total_users }}</div>
+                <div style="font-size:0.78rem; color:#94a3b8; text-transform:uppercase; letter-spacing:0.8px; margin-top:4px;">Total Users</div>
+            </div>
+
+        </div>
+
+        <!-- Recent Results Table -->
+        <div style="padding:0 2.5rem 3rem; max-width:1100px; margin:0 auto;" class="anim-5">
+            <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem; color:#f1f5f9;">Recent Extractions</h3>
+            <div class="card" style="padding:0; overflow:hidden;">
+                {% if recent_results %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Material</th>
+                            <th>Aluminum Yield</th>
+                            <th>Red Mud</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in recent_results %}
+                        <tr>
+                            <td style="color:#475569; font-size:0.8rem;">{{ forloop.counter }}</td>
+                            <td><span class="chip chip-blue">{{ r.material.name }}</span></td>
+                            <td><strong style="color:#4f8ef7;">{{ r.aluminum_yield }}</strong> <span style="color:#475569; font-size:0.8rem;">kg</span></td>
+                            <td style="color:#94a3b8;">{{ r.red_mud }} kg</td>
+                            <td style="color:#475569; font-size:0.82rem;">
+                                {% if r.created_at %}{{ r.created_at|date:"M d, Y" }}{% else %}—{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-box">
+                    <span class="e-icon">📭</span>
+                    <p>No extraction records yet.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="dash-grid" style="padding-top:0;">
+            <a href="/history/" class="dash-tile tile-blue anim-2">
+                <div class="tile-icon icon-blue">📋</div>
+                <h3>All Records</h3>
+                <p>View and search all extraction history across all users.</p>
+                <div class="tile-arrow">View All →</div>
+            </a>
+            <a href="/admin/" class="dash-tile tile-purple anim-3">
+                <div class="tile-icon icon-purple">⚙️</div>
+                <h3>Django Admin</h3>
+                <p>Access the full Django admin panel to manage all data.</p>
+                <div class="tile-arrow">Open Admin →</div>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

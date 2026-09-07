@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+    <h2>Material Processing Results</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Weight</th>
+            <th>Purity</th>
+            <th>Aluminum</th>
+            <th>Red Mud</th>
+        </tr>
+        {% for m, r in data %}
+        <tr>
+            <td>{{ m.name }}</td>
+            <td>{{ m.weight }}</td>
+            <td>{{ m.purity }}</td>
+            <td>{{ m.aluminum_yeild }}</td>
+            <td>{{ m.red_mud }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

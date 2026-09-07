@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Material — AluminumAI</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="page-bg">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="dot"></span>
+            AluminumAI
+        </div>
+        <div class="nav-links">
+            <a href="/dashboard/" class="btn btn-ghost btn-sm">← Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="form-page">
+        <div class="form-box anim-1">
+
+            <div class="form-box-header">
+                <a href="/dashboard/" class="back-link">← Back to Dashboard</a>
+                <h2>Process Material</h2>
+                <p>Enter raw material details to calculate aluminum yield</p>
+            </div>
+
+            <div class="card card-glow-blue form-card">
+                <form method="POST" autocomplete="off">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Material Name</label>
+                        <input type="text" name="name" class="form-input" placeholder="e.g. Bauxite" autocomplete="off" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Weight (kg)</label>
+                        <input type="number" step="0.01" name="weight" class="form-input" placeholder="e.g. 1000" autocomplete="off" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Purity (%)</label>
+                        <input type="number" step="0.01" name="purity" class="form-input" placeholder="e.g. 85.5" autocomplete="off" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient btn-full btn-lg" style="margin-top:0.75rem;">
+                        🚀 Calculate Results
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

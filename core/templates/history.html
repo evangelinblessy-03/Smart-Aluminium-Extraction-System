@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History — AluminumAI</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="page-bg">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="dot"></span>
+            AluminumAI
+        </div>
+        <div class="nav-links">
+            <a href="/add-material/" class="btn btn-gradient btn-sm">+ New Process</a>
+            <a href="/dashboard/"    class="btn btn-ghost    btn-sm">Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="history-page">
+
+        <div class="history-top anim-1">
+            <div>
+                <h2>📊 Process History</h2>
+                <p>All extraction records</p>
+            </div>
+            <form method="GET" class="search-row">
+                <input
+                    type="text"
+                    name="q"
+                    class="search-field"
+                    placeholder="🔍 Search material..."
+                    value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-gradient btn-sm">Search</button>
+                {% if request.GET.q %}
+                <a href="/history/" class="btn btn-ghost btn-sm">Clear</a>
+                {% endif %}
+            </form>
+        </div>
+
+        <div class="table-wrap anim-2">
+            <div class="card" style="padding:0; overflow:hidden;">
+
+                {% if results %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Material</th>
+                            <th>Aluminum Yield</th>
+                            <th>Red Mud</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in results %}
+                        <tr>
+                            <td style="color:#475569; font-size:0.8rem;">{{ forloop.counter }}</td>
+                            <td><span class="chip chip-blue">{{ r.material.name }}</span></td>
+                            <td>
+                                <span style="font-weight:800; color:#4f8ef7;">{{ r.aluminum_yield }}</span>
+                                <span style="color:#475569; font-size:0.8rem;"> kg</span>
+                            </td>
+                            <td style="color:#94a3b8;">{{ r.red_mud }} kg</td>
+                            <td style="color:#475569; font-size:0.82rem;">
+                                {% if r.created_at %}{{ r.created_at|date:"M d, Y" }}{% else %}—{% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% else %}
+                <div class="empty-box">
+                    <span class="e-icon">📭</span>
+                    <p>No records found{% if request.GET.q %} for "{{ request.GET.q }}"{% endif %}</p>
+                    <a href="/add-material/" class="btn btn-gradient">Process First Material</a>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
