@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AluminumAI — Smart Extraction System</title>
+    <link rel="stylesheet" href="./core/static/style.css">
+    <link rel="icon" href="./core/static/favicon.ico">
+    <style>
+        /* Extra styles for interactive demo section */
+        .simulator-section {
+            max-width: 900px;
+            margin: 0 auto 5rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .demo-card {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .result-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .result-val {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+        .val-aluminum { color: #4f8ef7; }
+        .val-redmud { color: #f97316; }
+    </style>
+</head>
+<body class="page-bg">
+
+    <!-- Navbar -->
+    <nav class="home-nav">
+        <div class="nav-brand">
+            <span class="dot"></span>
+            AluminumAI
+        </div>
+        <div class="nav-links">
+            <a href="#simulator" class="btn btn-ghost btn-sm">Live Simulator</a>
+            <a href="https://github.com/evangelinblessy-03/Smart-Aluminium-Extraction-System" target="_blank" class="btn btn-ghost btn-sm">GitHub</a>
+            <a href="https://smart-aluminium-extraction-system.onrender.com" target="_blank" class="btn btn-gradient btn-sm">🚀 Live App (Render)</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-pill">
+            <span class="pill-dot"></span>
+            Industrial AI Platform
+        </div>
+
+        <h1 class="hero-title">
+            Smart Aluminum<br>
+            <span class="grad-text">Extraction System</span>
+        </h1>
+
+        <p class="hero-sub">
+            Predict aluminum yield from raw materials with precision.
+            Track every extraction, analyze purity, and optimize your process — all in one place.
+        </p>
+
+        <div class="hero-btns">
+            <a href="#simulator" class="btn btn-gradient btn-lg">⚡ Try Live Simulator</a>
+            <a href="https://smart-aluminium-extraction-system.onrender.com" target="_blank" class="btn btn-ghost btn-lg">Full Cloud Web App</a>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-box">
+                <div class="num">99.8%</div>
+                <div class="lbl">Accuracy</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">Real-time</div>
+                <div class="lbl">Processing</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">2×</div>
+                <div class="lbl">Faster Analysis</div>
+            </div>
+            <div class="stat-box">
+                <div class="num">100%</div>
+                <div class="lbl">Data Tracked</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator for GitHub Pages -->
+    <section class="simulator-section" id="simulator">
+        <div class="demo-card">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <span class="hero-pill" style="margin-bottom: 0.75rem;">Interactive Demo</span>
+                <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">Material Yield Calculator</h2>
+                <p style="color: var(--muted); font-size: 0.95rem;">Simulate aluminum yield calculation directly in your browser.</p>
+            </div>
+
+            <form id="calcForm" onsubmit="calculateYield(event)">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="form-group">
+                        <label style="display:block; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.4rem;">Material Name</label>
+                        <input type="text" id="matName" class="form-input" value="Bauxite Grade A" required style="width: 100%; padding: 0.75rem 1rem; border-radius: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #fff;">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.4rem;">Total Weight (kg)</label>
+                        <input type="number" id="matWeight" step="0.01" class="form-input" value="1000" required style="width: 100%; padding: 0.75rem 1rem; border-radius: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #fff;">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.4rem;">Purity (%)</label>
+                        <input type="number" id="matPurity" step="0.01" max="100" class="form-input" value="85.5" required style="width: 100%; padding: 0.75rem 1rem; border-radius: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #fff;">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-gradient btn-full btn-lg" style="width: 100%; cursor: pointer;">
+                    🚀 Calculate Output
+                </button>
+            </form>
+
+            <div class="demo-grid" id="resultsArea">
+                <div class="result-box">
+                    <div style="font-size: 0.85rem; color: var(--muted); text-transform: uppercase; font-weight: 600;">Aluminum Yield</div>
+                    <div class="result-val val-aluminum" id="resAluminum">855.00 kg</div>
+                    <div style="font-size: 0.85rem; color: #4f8ef7;" id="resAluminumPct">85.5% of total input</div>
+                </div>
+                <div class="result-box">
+                    <div style="font-size: 0.85rem; color: var(--muted); text-transform: uppercase; font-weight: 600;">Red Mud Output</div>
+                    <div class="result-val val-redmud" id="resRedMud">145.00 kg</div>
+                    <div style="font-size: 0.85rem; color: #f97316;" id="resRedMudPct">14.5% byproduct</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.25rem; background: rgba(79, 142, 247, 0.08); border: 1px solid rgba(79, 142, 247, 0.2); border-radius: 12px; text-align: center;">
+                <p style="font-size: 0.95rem; color: var(--text); margin-bottom: 0.75rem;">
+                    💡 Want database storage, history logs, and full user/admin management?
+                </p>
+                <a href="https://smart-aluminium-extraction-system.onrender.com" target="_blank" class="btn btn-gradient btn-sm">
+                    Open Full Django Web Application →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border);">
+        © 2026 Smart Aluminum Extraction System — Developed by Evangelin Blessy RS
+    </footer>
+
+    <script>
+        function calculateYield(e) {
+            e.preventDefault();
+            const weight = parseFloat(document.getElementById('matWeight').value) || 0;
+            const purity = parseFloat(document.getElementById('matPurity').value) || 0;
+
+            const aluminum = Number((weight * (purity / 100)).toFixed(4));
+            const redMud = Number((weight - aluminum).toFixed(4));
+
+            document.getElementById('resAluminum').innerText = aluminum.toLocaleString() + ' kg';
+            document.getElementById('resRedMud').innerText = redMud.toLocaleString() + ' kg';
+            document.getElementById('resAluminumPct').innerText = purity + '% of total input';
+            document.getElementById('resRedMudPct').innerText = (100 - purity).toFixed(1) + '% byproduct';
+        }
+    </script>
+</body>
+</html>
