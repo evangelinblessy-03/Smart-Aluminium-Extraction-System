@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: smart-aluminium-extraction-system
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn aluminum_project.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
